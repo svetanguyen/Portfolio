@@ -33,9 +33,10 @@ function serve() {
 		server: './dist'
 	})
 
+	watch('src/parts/**.html', series(html)).on('change', sync.reload )
 	watch('src/**.html', series(html)).on('change', sync.reload)
-	watch('src/scss/**.scss', series(scss)).on('change', sync.reload)
+	watch('src/styles/**.scss', series(scss)).on('change', sync.reload)
 }
 
-// exports.serve = series(scss, html, serve);
-exports.build = series(scss, html) //does all the above in the written order
+exports.serve = series(scss, html, serve);
+// exports.build = series(scss, html) //does all the above in the written order
