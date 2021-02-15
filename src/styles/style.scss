@@ -49,6 +49,10 @@ table {
 
 // General styles
 
+body {
+	font-family: Roboto, sans-serif;
+}
+
 .wrapper {
 	max-width: 1220px;
 	margin: 0 auto;
@@ -59,7 +63,13 @@ h1, h2 {
 	text-align: center;
 }
 
+h1 {
+	font-size: 30px
+}
 
+.heading {
+	padding-bottom: 20px;
+}
 
 @media screen and (min-width: 641px) {
 	.medium-up-hide {
@@ -75,9 +85,16 @@ h1, h2 {
 
 // Header
 
-.menu-icon {
+.menu-icon,
+.nav-icon svg {
 	width: 30px;
 	height: 30px;
+}
+
+.nav-icon {
+	position: absolute;
+	right: 30px;
+	top: 30px;
 }
 
 header {
@@ -110,17 +127,25 @@ header .wrapper {
 @media screen and (max-width: 640px) {
 	.nav {
 		position: fixed;
+		padding: 50px;
 		top: 0;
 		left: 0;
 		right: 0;
 		bottom: 0;
 		transform: translateX(-100%);
+		background: #fff;
 
 		&.active {
 			transform: translateX(0);
+		}
+
+		.nav_link {
+			padding: 10px 15px;
+			display: inline-block;
 		}
 	}
 
 
 }
+
 
