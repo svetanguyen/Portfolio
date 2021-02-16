@@ -8,6 +8,19 @@ const menuDrawer = {
 	closeEl: closeEl
 };
 
+const themeMode = {
+	btn: document.querySelector('.modes'),
+	wrapper: document.querySelector('body'),
+	changeMode: changeMode
+};
+
+function changeMode() {
+	const wrapper = this.wrapper;
+	this.btn.addEventListener('click', function() {
+		wrapper.classList.toggle('dark_mode');
+	});
+};
+
 function openEl() {
 	const wrapper = this.wrapper;
 	this.open.addEventListener('click', function() {
@@ -25,6 +38,7 @@ function closeEl() {
 function init() {
 	menuDrawer.openEl();
 	menuDrawer.closeEl();
+	themeMode.changeMode();
 };
 
 init();
