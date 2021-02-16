@@ -6,6 +6,7 @@ const include = require('gulp-file-include');
 const htmlmin = require('gulp-htmlmin');
 const concat = require('gulp-concat');
 const autoprefixer = require('gulp-autoprefixer');
+const babel = require('gulp-babel');
 const sync = require('browser-sync').create();
 
 function html() {
@@ -27,15 +28,28 @@ function scss() {
 		.pipe(dest('dist'))
 }
 
+function babeljs() {
+	return src('./src/js/**.js')
+		.pipe(babel({
+			presets: ['@babel/env']
+		}))
+		.pipe(concat('custom.js'))
+		.pipe(dest('dist'))
+}
+
 
 function serve() {
 	sync.init({
 		server: './dist'
 	})
 
+	watch('src/parts/**.html', series(html)).on('change', sync.reload )
 	watch('src/**.html', series(html)).on('change', sync.reload)
-	watch('src/scss/**.scss', series(scss)).on('change', sync.reload)
+	watch('src/js/**.js', series(babeljs)).on('change', sync.reload)
+	watch('src/styles/**.scss', series(scss)).on('change', sync.reload)
 }
 
-// exports.serve = series(scss, html, serve);
-exports.build = series(scss, html) //does all the above in the written order
+
+
+exports.serve = series(scss, babeljs, html, serve);
+// exports.build = series(scss, html) //does all the above in the written order
